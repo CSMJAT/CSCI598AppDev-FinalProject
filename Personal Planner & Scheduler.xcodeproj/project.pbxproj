@@ -17,6 +17,9 @@
 		3FC9316B27F65534003177A9 /* TaskGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9316A27F65534003177A9 /* TaskGroupView.swift */; };
 		3FC9316D27F6557F003177A9 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9316C27F6557F003177A9 /* MenuView.swift */; };
 		3FC9316F27F655AA003177A9 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9316E27F655AA003177A9 /* ScheduleView.swift */; };
+		3FC9317327FF760E003177A9 /* NavigatorBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317227FF760E003177A9 /* NavigatorBarView.swift */; };
+		3FC9317727FF7D39003177A9 /* NavigatorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317627FF7D39003177A9 /* NavigatorBar.swift */; };
+		3FC9317927FF8E91003177A9 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317827FF8E91003177A9 /* UserInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		3FC9316A27F65534003177A9 /* TaskGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGroupView.swift; sourceTree = "<group>"; };
 		3FC9316C27F6557F003177A9 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3FC9316E27F655AA003177A9 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		3FC9317227FF760E003177A9 /* NavigatorBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorBarView.swift; sourceTree = "<group>"; };
+		3FC9317627FF7D39003177A9 /* NavigatorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorBar.swift; sourceTree = "<group>"; };
+		3FC9317827FF8E91003177A9 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 				3FC9316A27F65534003177A9 /* TaskGroupView.swift */,
 				3FC9316C27F6557F003177A9 /* MenuView.swift */,
 				3FC9316E27F655AA003177A9 /* ScheduleView.swift */,
+				3FC9317227FF760E003177A9 /* NavigatorBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -99,6 +106,8 @@
 			children = (
 				3FC9316427F65317003177A9 /* Task.swift */,
 				3FC9316627F65497003177A9 /* TaskGroup.swift */,
+				3FC9317627FF7D39003177A9 /* NavigatorBar.swift */,
+				3FC9317827FF8E91003177A9 /* UserInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,9 +187,12 @@
 				3FC9316B27F65534003177A9 /* TaskGroupView.swift in Sources */,
 				3FC9316527F65317003177A9 /* Task.swift in Sources */,
 				3FC9316727F65497003177A9 /* TaskGroup.swift in Sources */,
+				3FC9317927FF8E91003177A9 /* UserInformation.swift in Sources */,
+				3FC9317327FF760E003177A9 /* NavigatorBarView.swift in Sources */,
 				3FC9316F27F655AA003177A9 /* ScheduleView.swift in Sources */,
 				3FC9316927F65508003177A9 /* TaskView.swift in Sources */,
 				3FC9315227F64DB3003177A9 /* Personal_Planner___SchedulerApp.swift in Sources */,
+				3FC9317727FF7D39003177A9 /* NavigatorBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
