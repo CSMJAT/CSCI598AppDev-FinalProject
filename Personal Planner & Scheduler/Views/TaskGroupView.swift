@@ -16,64 +16,25 @@ struct TaskGroupView: View {
     @State var selectedTG: Bool = false
     
     var body: some View {
-//        NavigationView{
-//            VStack{
-//                NavigationLink(group.name){
-//                    EditTaskGroupView()
-//                }.buttonStyle(.plain)
-//                ForEach(group.tasks, id: \.id){ task in
-//                    GroupBox{
-//                        NavigationLink(task.name){
-//                            EditTaskView(task: task).padding()
-//                        }.buttonStyle(.borderless)
-//                    }
-//                }
-//                Button("Add New Task"){
-//                    selectedTask = userInfo.addTask(inGroup: group.id)
-//                }
-//            }
-//            Text("Select a task or task group.")
-//        }
         if !selectedT && !selectedTG {
-//            List{
-//                Button(group.name){
-//                    selectedTaskGroup = group
-//                    selectedTG = true
-//                }.buttonStyle(.plain)
-//                ForEach(group.tasks, id: \.id){ task in
-//                    GroupBox{
-//                        Button(task.name){
-//                            selectedTask = task
-//                            selectedT = true
-//                        }.buttonStyle(.borderless)
-//                    }
-//                }
-//                Button("Add New Task"){
-//                    selectedTask = userInfo.addNewTask(inGroup: group.id)
-//                    selectedT = true
-//                }
-//                ForEach(group.groups, id: \.id){ group in
-//                    TaskGroupView(group: group)
-//                }
-//                Button("Add New Task Group"){
-//                    selectedTaskGroup = userInfo.addNewTaskGroup(inGroup: group.id)
-//                    selectedTG = true
-//                }
-//            }.listStyle(.sidebar)
             VStack{
                 OutlineGroup(self.userInfo.getTree(group: userInfo.tasks), children: \.children) { taskItem in
                     if taskItem.task {
+                        Image(systemName: "square.and.pencil")
                         Button(taskItem.name){
                             selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: taskItem.taskID!)
                             selectedT = true
                         }.buttonStyle(.borderless)
                     } else {
+                        Image(systemName: "folder")
                         Button(taskItem.name){
                             selectedTaskGroup = userInfo.recursiveGetTaskGroup(currGrp: userInfo.tasks, taskGroupID: taskItem.taskGroupID!)
                             selectedTG = true
                         }.buttonStyle(.plain)
                     }
                 }
+                //TODO: get these buttons in the task bar
+                Divider()
                 HStack{
                     Button("Add New Task"){
                         selectedTask = userInfo.addNewTask(inGroup: group.id)

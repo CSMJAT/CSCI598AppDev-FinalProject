@@ -8,6 +8,8 @@
 import Foundation
 
 class UserInformation: ObservableObject {
+    //TODO: get data persistance working
+    
     var tasks = TaskGroup(groupID: nil)
     var allTasks: [Task] = []
     var allGroups: [TaskGroup] = []

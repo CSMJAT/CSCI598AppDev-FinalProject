@@ -19,9 +19,9 @@ class NavigatorBar: ObservableObject {
     @Published var selectedTab: UUID?
     
     init() {
-        let menuTab = Tab(name: "Menu", icon: Image(systemName: "trash"))
-        let taskGroupTab = Tab(name: "Tasks", icon: Image(systemName: "trash"))
-        let scheduleTab = Tab(name: "Schedule", icon: Image(systemName: "trash"))
+        let menuTab = Tab(name: "Menu", icon: Image(systemName: "menubar.rectangle"))
+        let taskGroupTab = Tab(name: "Tasks", icon: Image(systemName: "square.and.pencil"))
+        let scheduleTab = Tab(name: "Schedule", icon: Image(systemName: "calendar"))
         tabList = [menuTab, taskGroupTab, scheduleTab]
         selectedTab = menuTab.id
     }
