@@ -10,6 +10,7 @@ import SwiftUI
 struct MenuView: View {
     var body: some View {
         Text("View for menu settings")
+        //TODO: calendar settings?
         //TODO: save functionality?
         //TODO: break options?
     }

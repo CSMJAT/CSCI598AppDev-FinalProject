@@ -12,9 +12,9 @@ class Task: Identifiable, ObservableObject {
     var id = UUID()
     
     var name: String = "Untitled Task"
-    //var for scheduled times
+    //TODO: var for scheduled times
     var staticLength: Bool = false //TODO: change this to an enum maybe?
-    //var for estimated length
+    //TODO: var for estimated length
     var deadline: Date? = nil
     var notes: String = ""
     
@@ -25,5 +25,5 @@ class Task: Identifiable, ObservableObject {
         self.groupID = groupID
     }
     
-    //TODO: functions for modifying & getting info on tasks
+    //TODO: functions for getting info on tasks
 }

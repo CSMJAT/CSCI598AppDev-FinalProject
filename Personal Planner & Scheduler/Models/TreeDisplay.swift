@@ -11,7 +11,6 @@ struct TreeDisplay: Hashable, Identifiable {
     var id = UUID()
     var name: String
     var children: [TreeDisplay]? = nil
-    //TODO: get icons for task vs group in TaskGroupView working
     var task: Bool = true
     var taskID: Task.ID? = nil
     var taskGroupID: TaskGroup.ID? = nil
