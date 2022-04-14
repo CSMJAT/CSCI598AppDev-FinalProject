@@ -98,7 +98,7 @@ struct TaskGroupView: View {
 
 struct TaskGroupView_Previews: PreviewProvider {
     static var previews: some View {
-        let group = TaskGroup()
+        let group = TaskGroup(groupID: nil)
         TaskGroupView(group: group)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct EditTaskView: View {
     @EnvironmentObject var userInfo: UserInformation
     var task: Task
-    @State private var groupID: TaskGroup.ID = TaskGroup().id
+    @State private var groupID: TaskGroup.ID = TaskGroup(groupID: nil).id
     @Binding var selected: Bool
     @State var name: String = "Untitled"
     @State var notes: String = ""
@@ -37,6 +37,10 @@ struct EditTaskView: View {
                 }
             }
             HStack{
+                Button("Delete Task"){
+                    userInfo.removeTask(taskID: task.id)
+                    self.selected = false
+                }
                 Button("Cancel"){
                     self.selected = false
                 }
@@ -53,7 +57,7 @@ struct EditTaskView: View {
 
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
-        let tg = TaskGroup()
+        let tg = TaskGroup(groupID: nil)
         let task = Task(groupID: tg.id)
         let selected = true
         EditTaskView(task: task, selected: .constant(selected))

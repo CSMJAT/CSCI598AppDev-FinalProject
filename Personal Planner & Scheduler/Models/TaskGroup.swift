@@ -15,6 +15,12 @@ class TaskGroup: Identifiable {
     var tasks: [Task] = []
     var groups: [TaskGroup] = []
     
+    var groupID: TaskGroup.ID? = nil
+    
+    init(groupID: TaskGroup.ID?){
+        self.groupID = groupID
+    }
+    
     func addTask(task: Task) {
         tasks.append(task)
     }

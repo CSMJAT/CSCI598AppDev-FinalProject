@@ -8,7 +8,7 @@
 import Foundation
 
 class UserInformation: ObservableObject {
-    var tasks = TaskGroup()
+    var tasks = TaskGroup(groupID: nil)
     var allTasks: [Task] = []
     var allGroups: [TaskGroup] = []
     
@@ -63,8 +63,19 @@ class UserInformation: ObservableObject {
         return taskResult
     }
     
+    func removeTask(taskID: Task.ID) {
+        guard let task = recursiveGetTask(currGrp: tasks, taskID: taskID) else { return }
+        recursiveGetTaskGroup(currGrp: tasks, taskGroupID: task.groupID)?.removeTask(task: task)
+        for index in 0..<allTasks.count {
+            if allTasks[index].id == taskID{
+                allTasks.remove(at: index)
+                return
+            }
+        }
+    }
+    
     func addNewTaskGroup(inGroup group: TaskGroup.ID) -> TaskGroup {
-        let newTaskGroup = TaskGroup()
+        let newTaskGroup = TaskGroup(groupID: group)
         recursiveAddTaskGroup(currGrp: tasks, groupID: group, taskGroup: newTaskGroup)
         allGroups.append(newTaskGroup)
         return newTaskGroup
@@ -80,6 +91,19 @@ class UserInformation: ObservableObject {
         }
     }
     
+    func assignTaskGroupGroup(grpID: TaskGroup.ID?, taskGroupID: TaskGroup.ID){
+        guard let taskGroup = recursiveGetTaskGroup(currGrp: tasks, taskGroupID: taskGroupID) else {return}
+        if taskGroup.groupID == grpID { return }
+        var tgID = tasks.id
+        if grpID != nil {tgID = grpID!}
+        guard let tg = recursiveGetTaskGroup(currGrp: tasks, taskGroupID: tgID) else {return}
+        tg.addTaskGroup(taskGroup: taskGroup)
+        guard let id = taskGroup.groupID else {return}
+        guard let tg2 = recursiveGetTaskGroup(currGrp: tasks, taskGroupID: id) else {return}
+        tg2.removeTaskGroup(taskGroup: taskGroup)
+        taskGroup.groupID = tgID
+    }
+    
     func recursiveGetTaskGroup(currGrp: TaskGroup, taskGroupID id: TaskGroup.ID) -> TaskGroup? {
         if currGrp.id == id {
             return currGrp
@@ -92,6 +116,32 @@ class UserInformation: ObservableObject {
             }
         }
         return taskGrpResult
+    }
+    
+    func removeTaskGroup(taskGroupID: TaskGroup.ID) {
+        guard let group = recursiveGetTaskGroup(currGrp: tasks, taskGroupID: taskGroupID) else { return }
+        for task in group.tasks {
+            removeTask(taskID: task.id)
+        }
+        recursiveRemoveTaskGroup(taskGroupID: taskGroupID)
+    }
+    
+    private func recursiveRemoveTaskGroup(taskGroupID: TaskGroup.ID){
+        guard let group = recursiveGetTaskGroup(currGrp: tasks, taskGroupID: taskGroupID) else { return }
+        guard let parentGroupID = group.groupID else { return }
+        for task in group.tasks {
+            removeTask(taskID: task.id)
+        }
+        for group in group.groups {
+            recursiveRemoveTaskGroup(taskGroupID: group.id)
+        }
+        recursiveGetTaskGroup(currGrp: tasks, taskGroupID: parentGroupID)?.removeTaskGroup(taskGroup: group)
+        for index in 0..<allGroups.count {
+            if allGroups[index].id == taskGroupID{
+                allGroups.remove(at: index)
+                return
+            }
+        }
     }
     
     func getTree(group: TaskGroup) -> TreeDisplay {
