@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var info = UserInformation()
     var body: some View {
-        NavigatorBarView()
+        NavigatorBarView(userInfo: info)
             .padding()
     }
 }

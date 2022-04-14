@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct NavigatorBarView: View {
+    @StateObject var userInfo = UserInformation()
     @StateObject var navigator = NavigatorBar()
-    let menuView = MenuView()
-    let taskGroupView = TaskGroupView()
-    let scheduleView = ScheduleView()
+    //let menuView = MenuView()
+    //let taskGroupView = TaskGroupView()
+    //let scheduleView = ScheduleView()
     
     var body: some View {
         NavigationView{
@@ -23,14 +24,14 @@ struct NavigatorBarView: View {
                 }
             }.listStyle(.sidebar)
             Text("Select a Tab")
-        }
+        }.environmentObject(userInfo)
     }
     
     @ViewBuilder func getView(name: String) -> some View {
         switch name {
-        case "Menu": menuView.self
-        case "Tasks": taskGroupView.self
-        case "Schedule": scheduleView.self
+        case "Menu": MenuView() //menuView.self
+        case "Tasks": TaskGroupView(group: userInfo.tasks).padding().frame(minWidth: 400, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity) //taskGroupView.self
+        case "Schedule": ScheduleView() //scheduleView.self
         default:
             Text("Select a Tab")
         }

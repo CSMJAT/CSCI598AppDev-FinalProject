@@ -10,8 +10,29 @@ import Foundation
 class TaskGroup: Identifiable {
     var id = UUID()
     
-    private var name: String = ""
+    var name: String = "Untitled Group"
+    var description: String = ""
     var tasks: [Task] = []
+    var groups: [TaskGroup] = []
     
+    func addTask(task: Task) {
+        tasks.append(task)
+    }
+    
+    func removeTask(task: Task) {
+        tasks.removeAll{ otherTask in
+            return otherTask.id == task.id
+        }
+    }
+    
+    func addTaskGroup(taskGroup: TaskGroup) {
+        groups.append(taskGroup)
+    }
+    
+    func removeTaskGroup(taskGroup: TaskGroup) {
+        groups.removeAll{ otherGroup in
+            return otherGroup.id == taskGroup.id
+        }
+    }
     //TODO: Group statistics?
 }

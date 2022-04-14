@@ -7,17 +7,23 @@
 
 import Foundation
 
-class Task: Identifiable {
+class Task: Identifiable, ObservableObject {
+    
     var id = UUID()
     
-    private var name: String = ""
+    var name: String = "Untitled Task"
     //var for scheduled times
-    private var staticLength: Bool = false //TODO: change this to an enum maybe?
+    var staticLength: Bool = false //TODO: change this to an enum maybe?
     //var for estimated length
-    private var deadline: Date? = nil
-    private var notes: String = ""
+    var deadline: Date? = nil
+    var notes: String = ""
+    
+    var groupID: TaskGroup.ID
     
     //TODO: Initializer(s) for creating tasks
+    init(groupID: TaskGroup.ID){
+        self.groupID = groupID
+    }
     
     //TODO: functions for modifying & getting info on tasks
 }
