@@ -112,8 +112,8 @@
 				3FC9316427F65317003177A9 /* Task.swift */,
 				3FC9316627F65497003177A9 /* TaskGroup.swift */,
 				3FC9317627FF7D39003177A9 /* NavigatorBar.swift */,
-				3FC9317827FF8E91003177A9 /* UserInformation.swift */,
 				3FC9317C2807C7C8003177A9 /* TreeDisplay.swift */,
+				3FC9317827FF8E91003177A9 /* UserInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
