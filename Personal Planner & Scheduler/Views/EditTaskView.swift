@@ -13,7 +13,9 @@ struct EditTaskView: View {
     @State private var groupID: TaskGroup.ID = TaskGroup(groupID: nil).id
     @Binding var selected: Bool
     @State var name: String = "Untitled"
+    @State private var deadline = Date()
     @State var notes: String = ""
+    @State var hasDeadline: Bool = false
     
     var body: some View {
         VStack{
@@ -27,6 +29,29 @@ struct EditTaskView: View {
                 Picker("Select Group", selection: $groupID){
                     ForEach(userInfo.allGroups, id: \.id){ group in
                         Text(group.name)
+                    }
+                }
+            }
+            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
+                if task.deadline != nil {
+                    hasDeadline = true
+                }
+            }
+            if hasDeadline {
+                GroupBox {
+                    Text("Deadline")
+                    HStack{
+                        DatePicker("Date", selection: $deadline, displayedComponents: .date).onAppear{
+                            if task.deadline != nil {
+                                deadline = task.deadline!
+                            }
+                        }//.datePickerStyle(.graphical)
+                        Divider()
+                        DatePicker("Time", selection: $deadline, displayedComponents: .hourAndMinute).onAppear{
+                            if task.deadline != nil {
+                                deadline = task.deadline!
+                            }
+                        }
                     }
                 }
             }
@@ -48,6 +73,11 @@ struct EditTaskView: View {
                     userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.name = name
                     userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.notes = notes
                     userInfo.assignTaskGroup(grpID: groupID, taskID: task.id)
+                    if hasDeadline {
+                        userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = deadline
+                    } else {
+                        userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = nil
+                    }
                     self.selected = false
                 }
             }
