@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3FC9315227F64DB3003177A9 /* Personal_Planner___SchedulerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9315127F64DB3003177A9 /* Personal_Planner___SchedulerApp.swift */; };
 		3FC9315427F64DB3003177A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9315327F64DB3003177A9 /* ContentView.swift */; };
-		3FC9315627F64DB5003177A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9315527F64DB5003177A9 /* Assets.xcassets */; };
 		3FC9315927F64DB5003177A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9315827F64DB5003177A9 /* Preview Assets.xcassets */; };
 		3FC9316527F65317003177A9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9316427F65317003177A9 /* Task.swift */; };
 		3FC9316727F65497003177A9 /* TaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9316627F65497003177A9 /* TaskGroup.swift */; };
@@ -22,6 +21,7 @@
 		3FC9317927FF8E91003177A9 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317827FF8E91003177A9 /* UserInformation.swift */; };
 		3FC9317B28078BCB003177A9 /* EditTaskGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317A28078BCB003177A9 /* EditTaskGroupView.swift */; };
 		3FC9317D2807C7C8003177A9 /* TreeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9317C2807C7C8003177A9 /* TreeDisplay.swift */; };
+		3FD9C7802808980B0018331E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC9315527F64DB5003177A9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,8 +176,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD9C7802808980B0018331E /* Assets.xcassets in Resources */,
 				3FC9315927F64DB5003177A9 /* Preview Assets.xcassets in Resources */,
-				3FC9315627F64DB5003177A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
