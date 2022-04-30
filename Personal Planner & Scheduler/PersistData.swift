@@ -27,7 +27,7 @@ final class PersistData: ReferenceFileDocument {
     }
     
     init() {
-        userInfo = UserInformation() //TODO: change this?
+        userInfo = UserInformation()
     }
     
     init(configuration: ReadConfiguration) throws {

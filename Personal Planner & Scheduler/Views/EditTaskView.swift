@@ -61,26 +61,35 @@ struct EditTaskView: View {
                     notes = task.notes
                 }
             }
-            HStack{
-                Button("Delete Task"){
-                    userInfo.removeTask(taskID: task.id)
-                    self.selected = false
-                }
-                Button("Cancel"){
-                    self.selected = false
-                }
-                Button("Save and Return"){
-                    userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.name = name
-                    userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.notes = notes
-                    userInfo.assignTaskGroup(grpID: groupID, taskID: task.id)
-                    if hasDeadline {
-                        userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = deadline
-                    } else {
-                        userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = nil
-                    }
-                    self.selected = false
-                }
+            .toolbar{
+                ToolbarItem{saveTaskButton}
+                ToolbarItem{cancelTaskButton}
+                ToolbarItem{deleteTaskButton}
             }
+        }
+    }
+    var deleteTaskButton: some View {
+        Button("Delete"){
+            userInfo.removeTask(taskID: task.id)
+            self.selected = false
+        }
+    }
+    var cancelTaskButton: some View {
+        Button("Cancel"){
+            self.selected = false
+        }
+    }
+    var saveTaskButton: some View {
+        Button("Save"){
+            userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.name = name
+            userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.notes = notes
+            userInfo.assignTaskGroup(grpID: groupID, taskID: task.id)
+            if hasDeadline {
+                userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = deadline
+            } else {
+                userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = nil
+            }
+            self.selected = false
         }
     }
 }

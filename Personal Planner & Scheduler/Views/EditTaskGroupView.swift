@@ -38,17 +38,18 @@ struct EditTaskGroupView: View {
                     description = group.description
                 }
             }
-            HStack{
-                if group.id != userInfo.tasks.id {
-                    Button("Delete Group"){
-                        userInfo.removeTaskGroup(taskGroupID: group.id)
-                        self.selected = false
-                    }
-                }
-                Button("Cancel"){
-                    self.selected = false
-                }
-                Button("Save and Return"){
+        }
+        .toolbar{
+            ToolbarItem{saveGroupButton}
+            ToolbarItem{cancelGroupButton}
+            ToolbarItem{deleteGroupButton}
+        }
+    }
+    
+    var saveGroupButton: some View {
+        HStack{
+            if group.id != userInfo.tasks.id {
+                Button("Save"){
                     userInfo.recursiveGetTaskGroup(currGrp: userInfo.tasks, taskGroupID: group.id)?.name = name
                     userInfo.recursiveGetTaskGroup(currGrp: userInfo.tasks, taskGroupID: group.id)?.description = description
                     if group.id != userInfo.tasks.id {
@@ -56,6 +57,27 @@ struct EditTaskGroupView: View {
                     }
                     self.selected = false
                 }
+            } else {
+                Text("")
+            }
+        }
+    }
+    
+    var cancelGroupButton: some View {
+        Button("Cancel"){
+            self.selected = false
+        }
+    }
+    
+    var deleteGroupButton: some View {
+        HStack{
+            if group.id != userInfo.tasks.id {
+                Button("Delete Group"){
+                    userInfo.removeTaskGroup(taskGroupID: group.id)
+                    self.selected = false
+                }
+            } else {
+                Text("")
             }
         }
     }
