@@ -33,26 +33,31 @@ struct TaskGroupView: View {
                         }.buttonStyle(.plain)
                     }
                 }
-                //TODO: get these buttons in the task bar
-                Divider()
-                HStack{
-                    Button("Add New Task"){
-                        selectedTask = userInfo.addNewTask(inGroup: group.id)
-                        selectedT = true
-                    }
-                    Button("Add New Task Group"){
-                        selectedTaskGroup = userInfo.addNewTaskGroup(inGroup: group.id)
-                        selectedTG = true
-                    }
-                }
             }
-            
+            .toolbar {
+                ToolbarItem{addTaskButton}
+                ToolbarItem{addGroupButton}
+            }
         } else if selectedT {
             EditTaskView(task: selectedTask!, selected: $selectedT).padding()
         } else if selectedTG {
             EditTaskGroupView(group: selectedTaskGroup!, selected: $selectedTG).padding()
         } else {
             EmptyView()
+        }
+    }
+    
+    var addTaskButton: some View {
+        Button("Add New Task"){
+            selectedTask = userInfo.addNewTask(inGroup: group.id)
+            selectedT = true
+        }
+    }
+    
+    var addGroupButton: some View {
+        Button("Add New Group"){
+            selectedTaskGroup = userInfo.addNewTaskGroup(inGroup: group.id)
+            selectedTG = true
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NavigatorBarView: View {
-    @StateObject var userInfo = UserInformation()
+    @StateObject var userInfo: UserInformation
     @StateObject var navigator = NavigatorBar()
     
     var body: some View {
@@ -40,6 +40,6 @@ struct NavigatorBarView: View {
 
 struct NavigatorBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigatorBarView()
+        NavigatorBarView(userInfo: UserInformation())
     }
 }

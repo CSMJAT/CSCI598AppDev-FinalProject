@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Task: Identifiable, ObservableObject {
+class Task: Identifiable, ObservableObject, Codable {
     
     var id = UUID()
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskGroup: Identifiable {
+class TaskGroup: Identifiable, Codable {
     var id = UUID()
     
     var name: String = "Untitled Group"
