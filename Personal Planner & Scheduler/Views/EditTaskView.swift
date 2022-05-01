@@ -45,9 +45,6 @@ struct EditTaskView: View {
                     taskType = task.type
                 }
             }
-            Button("Test"){
-                print(String(describing: taskType))
-            }
 //            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
 //                if task.deadline != nil {
 //                    hasDeadline = true
