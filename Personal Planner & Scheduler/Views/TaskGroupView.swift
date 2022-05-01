@@ -18,21 +18,7 @@ struct TaskGroupView: View {
     var body: some View {
         if !selectedT && !selectedTG {
             VStack{
-                OutlineGroup(self.userInfo.getTree(group: userInfo.tasks), children: \.children) { taskItem in
-                    if taskItem.task {
-                        Image(systemName: "square.and.pencil")
-                        Button(taskItem.name){
-                            selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: taskItem.taskID!)
-                            selectedT = true
-                        }.buttonStyle(.borderless)
-                    } else {
-                        Image(systemName: "folder")
-                        Button(taskItem.name){
-                            selectedTaskGroup = userInfo.recursiveGetTaskGroup(currGrp: userInfo.tasks, taskGroupID: taskItem.taskGroupID!)
-                            selectedTG = true
-                        }.buttonStyle(.plain)
-                    }
-                }
+                TreeView(branch: self.userInfo.getTree(group: userInfo.tasks), expanded: true, selectedT: $selectedT, selectedTG: $selectedTG, selectedTask: $selectedTask, selectedTaskGroup: $selectedTaskGroup)
             }
             .toolbar {
                 ToolbarItem{addTaskButton}

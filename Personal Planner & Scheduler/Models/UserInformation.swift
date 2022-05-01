@@ -155,6 +155,7 @@ class UserInformation: ObservableObject, Codable {
         }
         if !children.isEmpty {
             branch.children = children
+            branch.expanded = group.expanded
         }
         return branch
     }

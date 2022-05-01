@@ -17,6 +17,8 @@ class TaskGroup: Identifiable, Codable {
     
     var groupID: TaskGroup.ID? = nil
     
+    var expanded: Bool = true
+    
     init(groupID: TaskGroup.ID?){
         self.groupID = groupID
     }
