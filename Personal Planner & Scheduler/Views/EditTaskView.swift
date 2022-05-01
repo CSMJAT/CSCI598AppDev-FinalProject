@@ -14,8 +14,10 @@ struct EditTaskView: View {
     @Binding var selected: Bool
     @State var name: String = "Untitled"
     @State private var deadline = Date()
+    @State private var startTime = Date()
+    @State private var endTime = Date()
     @State var notes: String = ""
-    @State var hasDeadline: Bool = false
+    @State var taskType: Task.taskType = .neither
     
     var body: some View {
         VStack{
@@ -30,30 +32,70 @@ struct EditTaskView: View {
                     ForEach(userInfo.allGroups, id: \.id){ group in
                         Text(group.name)
                     }
+                }.onAppear{
+                    groupID = task.groupID
                 }
             }
-            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
-                if task.deadline != nil {
-                    hasDeadline = true
+            HStack {
+                Picker("Task Type", selection: $taskType){
+                    ForEach(Task.taskType.allCases, id: \.self){ tType in
+                        Text(tType.rawValue).tag(tType)
+                    }
+                }.onAppear{
+                    taskType = task.type
                 }
             }
-            if hasDeadline {
+            Button("Test"){
+                print(String(describing: taskType))
+            }
+//            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
+//                if task.deadline != nil {
+//                    hasDeadline = true
+//                }
+//            }
+            switch(taskType){
+            case .deadline:
                 GroupBox {
                     Text("Deadline")
+                    DatePicker("Date", selection: $deadline, displayedComponents: .date).onAppear{
+                        if task.deadline != nil {
+                            deadline = task.deadline!
+                        }
+                    }//.datePickerStyle(.graphical)
+                    DatePicker("Time", selection: $deadline, displayedComponents: .hourAndMinute).onAppear{
+                        if task.deadline != nil {
+                            deadline = task.deadline!
+                        }
+                    }
+                }
+            case .scheduled:
+                GroupBox{
                     HStack{
-                        DatePicker("Date", selection: $deadline, displayedComponents: .date).onAppear{
-                            if task.deadline != nil {
-                                deadline = task.deadline!
+                        Text("Date")
+                        DatePicker("Date", selection: $startTime, displayedComponents: .date).onAppear{
+                            if task.startTime != nil {
+                                startTime = task.startTime!
                             }
-                        }//.datePickerStyle(.graphical)
+                        }
                         Divider()
-                        DatePicker("Time", selection: $deadline, displayedComponents: .hourAndMinute).onAppear{
-                            if task.deadline != nil {
-                                deadline = task.deadline!
+                        VStack{
+                            Text("Start Time")
+                            DatePicker("Time", selection: $startTime, displayedComponents: .hourAndMinute).onAppear{
+                                if task.startTime != nil {
+                                    startTime = task.startTime!
+                                }
+                            }
+                            Text("End Time")
+                            DatePicker("Time", selection: $endTime, displayedComponents: .hourAndMinute).onAppear{
+                                if task.endTime != nil {
+                                    endTime = task.endTime!
+                                }
                             }
                         }
                     }
                 }
+            case .neither:
+                EmptyView()
             }
             HStack{
                 Text("Notes: ")
@@ -84,11 +126,16 @@ struct EditTaskView: View {
             userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.name = name
             userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.notes = notes
             userInfo.assignTaskGroup(grpID: groupID, taskID: task.id)
-            if hasDeadline {
+            switch (taskType){
+            case .deadline:
                 userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = deadline
-            } else {
-                userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.deadline = nil
+            case .scheduled:
+                userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.startTime = startTime
+                userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.endTime = endTime
+            case .neither:
+                break
             }
+            userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)?.type = taskType
             self.selected = false
         }
     }

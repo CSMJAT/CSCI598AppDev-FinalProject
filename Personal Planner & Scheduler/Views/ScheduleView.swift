@@ -14,6 +14,9 @@ struct ScheduleView: View {
         //TODO: select a task brings you to the EditTaskView for it? (or an inspector view?)
         //TODO: select a task gives you options for managing the task (i.e. start task, end task, delay task, etc)
         //TODO: download schedule functionality? (Maybe put this in menu?)
+        .toolbar{
+            ToolbarItem{Text("")} //Set to make the UI consistent across NavigatorBarWindows
+        }
     }
 }
 

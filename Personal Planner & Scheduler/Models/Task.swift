@@ -12,11 +12,22 @@ class Task: Identifiable, ObservableObject, Codable {
     var id = UUID()
     
     var name: String = "Untitled Task"
-    //TODO: var for scheduled times
-    var staticLength: Bool = false //TODO: change this to an enum maybe?
-    //TODO: var for estimated length
+    
+    enum taskType: String, Codable, CaseIterable {
+        case scheduled = "Scheduled"
+        case deadline = "Deadline"
+        case neither = "Neither"
+    }
+    var type: taskType = .neither
+    
+    //Variables for scheduled times:
+    var startTime: Date? = nil
+    var endTime: Date? = nil
+    //Variable for deadline
     var deadline: Date? = nil
+    
     var notes: String = ""
+    var estimatedLength: Double = 0.0
     
     var groupID: TaskGroup.ID
     

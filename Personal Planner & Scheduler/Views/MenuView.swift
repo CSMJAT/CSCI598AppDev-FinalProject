@@ -13,6 +13,9 @@ struct MenuView: View {
         //TODO: calendar settings?
         //TODO: save functionality?
         //TODO: break options?
+        .toolbar{
+            ToolbarItem{Text("")} //Set to make the UI consistent across NavigatorBarWindows
+        }
     }
 }
 

@@ -43,7 +43,6 @@ struct TreeView: View {
                         selectedTaskGroup = userInfo.recursiveGetTaskGroup(currGrp: userInfo.tasks, taskGroupID: branch.taskGroupID!)
                         selectedTG = true
                     }.buttonStyle(.plain)
-                    Text("(\(String(describing: branch.expanded)))")
                 }
             })
         }
