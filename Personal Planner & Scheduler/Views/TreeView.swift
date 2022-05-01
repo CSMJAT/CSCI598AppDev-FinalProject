@@ -30,7 +30,7 @@ struct TreeView: View {
                 if expanded {
                     if branch.children != nil {
                         ForEach(branch.children!){ child in
-                            TreeView(branch: child, expanded: child.expanded, selectedT: $selectedT, selectedTG: $selectedTG, selectedTask: $selectedTask, selectedTaskGroup: $selectedTaskGroup)
+                            TreeView(branch: child, expanded: child.expanded, selectedT: $selectedT, selectedTG: $selectedTG, selectedTask: $selectedTask, selectedTaskGroup: $selectedTaskGroup).padding(.leading,20)
                         }
                     } else {
                         Text("Empty").italic().foregroundColor(.secondary)
