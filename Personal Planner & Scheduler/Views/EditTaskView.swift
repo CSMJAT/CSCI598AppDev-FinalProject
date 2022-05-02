@@ -92,6 +92,7 @@ struct EditTaskView: View {
                     notes = task.notes
                 }
             }
+            Spacer().frame(minHeight: 125, maxHeight: 1000)
             Divider()
             Button("Mark Task as Complete"){
                 userInfo.removeTask(taskID: task.id)
@@ -102,6 +103,12 @@ struct EditTaskView: View {
                 ToolbarItem{cancelTaskButton}
                 ToolbarItem{deleteTaskButton}
             }
+        }
+    }
+    var completeTaskButton: some View {
+        Button("Complete Task"){
+            userInfo.removeTask(taskID: task.id)
+            self.selected = false
         }
     }
     var deleteTaskButton: some View {
