@@ -17,18 +17,19 @@ struct ScheduleView: View {
     }
     @State var selectedTask: Task? = nil
     @State var selectedT: Bool = false
+    var allTasks: [Task] = []
     
     var body: some View {
         if !selectedT {
             VStack{
-                Picker("Task Type", selection: $sort){
+                Picker("Sort by", selection: $sort){
                     ForEach(sortType.allCases, id: \.self){ sType in
                         Text(sType.rawValue).tag(sType)
                     }
                 }
                 switch (sort) {
                 case .alphabetical:
-                    ForEach(userInfo.allTasks.sorted{$0.name < $1.name}){ task in
+                    ForEach(userInfo.getAllTasks().sorted{$0.name < $1.name}){ task in
                         HStack{
                             Image(systemName: "square.and.pencil")
                             Button(task.name){
@@ -38,7 +39,7 @@ struct ScheduleView: View {
                         }
                     }
                 case .duedate:
-                    ForEach(userInfo.allTasks.sorted{
+                    ForEach(userInfo.getAllTasks().sorted{
                         var date0: Date = .distantFuture
                         var date1: Date = .distantFuture
                         switch ($0.type){

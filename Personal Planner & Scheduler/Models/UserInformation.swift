@@ -9,7 +9,6 @@ import Foundation
 
 class UserInformation: ObservableObject, Codable {
     var tasks = TaskGroup(groupID: nil)
-    var allTasks: [Task] = []
     var allGroups: [TaskGroup] = []
     
     init() {
@@ -21,7 +20,6 @@ class UserInformation: ObservableObject, Codable {
     func addNewTask(inGroup group: TaskGroup.ID) -> Task {
         let newTask = Task(groupID: group)
         recursiveAddTask(currGrp: tasks, groupID: group, task: newTask)
-        allTasks.append(newTask)
         return newTask
     }
     
@@ -63,15 +61,24 @@ class UserInformation: ObservableObject, Codable {
         return taskResult
     }
     
+    func getAllTasks() -> [Task] {
+        return recursiveGetAllTasks(group: tasks)
+    }
+    
+    func recursiveGetAllTasks(group: TaskGroup) -> [Task]{
+        var tasks: [Task] = []
+        for task in group.tasks {
+            tasks.append(task)
+        }
+        for otherGroup in group.groups {
+            tasks.append(contentsOf: recursiveGetAllTasks(group: otherGroup))
+        }
+        return tasks
+    }
+    
     func removeTask(taskID: Task.ID) {
         guard let task = recursiveGetTask(currGrp: tasks, taskID: taskID) else { return }
         recursiveGetTaskGroup(currGrp: tasks, taskGroupID: task.groupID)?.removeTask(task: task)
-        for index in 0..<allTasks.count {
-            if allTasks[index].id == taskID{
-                allTasks.remove(at: index)
-                return
-            }
-        }
     }
     
     func addNewTaskGroup(inGroup group: TaskGroup.ID) -> TaskGroup {
