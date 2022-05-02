@@ -29,6 +29,12 @@ struct EditTaskGroupView: View {
                         ForEach(userInfo.allGroups.filter{item in return item.id != group.id}, id: \.id){ group in
                             Text(group.name)
                         }
+                    }.onAppear{
+                        if group.groupID != nil {
+                            groupID = group.groupID!
+                        } else {
+                            groupID = userInfo.tasks.id
+                        }
                     }
                 }
             }
