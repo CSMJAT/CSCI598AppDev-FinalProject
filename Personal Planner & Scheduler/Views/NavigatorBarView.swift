@@ -23,15 +23,17 @@ struct NavigatorBarView: View {
                     }
                 }
             }.listStyle(.sidebar)
-            Text("Select a Tab")
+            ScrollView{
+                Text("Select a Tab")
+            }
         }.environmentObject(userInfo)
     }
     
     @ViewBuilder func getView(name: String) -> some View {
         switch name {
-        case "Menu": MenuView()
-        case "Tasks": TaskGroupView(group: userInfo.tasks).padding().frame(minWidth: 400, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
-        case "Schedule": ScheduleView()
+        //case "Menu": ScrollView{MenuView()}
+        case "Tasks": ScrollView{TaskGroupView(group: userInfo.tasks).padding().frame(minWidth: 400, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)}
+        case "Schedule": ScrollView{ScheduleView()}
         default:
             Text("Select a Tab")
         }

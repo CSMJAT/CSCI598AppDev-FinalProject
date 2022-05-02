@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct MenuView: View {
+    @EnvironmentObject var userInfo: UserInformation
+    
     var body: some View {
-        Text("View for menu settings")
-        //TODO: calendar settings?
-        //TODO: save functionality?
-        //TODO: break options?
+        HStack{
+            Text("Settings").font(.headline)
+//            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
+//                if task.deadline != nil {
+//                    hasDeadline = true
+//                }
+//            }
+        }
         .toolbar{
-            ToolbarItem{Text("")} //Set to make the UI consistent across NavigatorBarWindows
+            ToolbarItem{saveButton}
+        }
+    }
+    
+    var saveButton: some View {
+        Button("Save"){
+            return //TODO: get settings in UserInformation
         }
     }
 }

@@ -18,6 +18,7 @@ struct EditTaskView: View {
     @State private var endTime = Date()
     @State var notes: String = ""
     @State var taskType: Task.taskType = .neither
+    @State var complete: Bool = false
     
     var body: some View {
         VStack{
@@ -45,11 +46,6 @@ struct EditTaskView: View {
                     taskType = task.type
                 }
             }
-//            Toggle("Deadline", isOn: $hasDeadline).toggleStyle(.checkbox).onAppear{
-//                if task.deadline != nil {
-//                    hasDeadline = true
-//                }
-//            }
             switch(taskType){
             case .deadline:
                 GroupBox {
@@ -68,22 +64,18 @@ struct EditTaskView: View {
             case .scheduled:
                 GroupBox{
                     HStack{
-                        Text("Date")
-                        DatePicker("Date", selection: $startTime, displayedComponents: .date).onAppear{
-                            if task.startTime != nil {
-                                startTime = task.startTime!
-                            }
-                        }
-                        Divider()
                         VStack{
-                            Text("Start Time")
-                            DatePicker("Time", selection: $startTime, displayedComponents: .hourAndMinute).onAppear{
+                            Text("Start Date and Time")
+                            DatePicker("Date & Time", selection: $startTime, displayedComponents: [.date, .hourAndMinute]).onAppear{
                                 if task.startTime != nil {
                                     startTime = task.startTime!
                                 }
                             }
-                            Text("End Time")
-                            DatePicker("Time", selection: $endTime, displayedComponents: .hourAndMinute).onAppear{
+                        }
+                        Divider()
+                        VStack{
+                            Text("End Date and Time")
+                            DatePicker("Date & Time", selection: $endTime, displayedComponents: [.date, .hourAndMinute]).onAppear{
                                 if task.endTime != nil {
                                     endTime = task.endTime!
                                 }
@@ -100,6 +92,11 @@ struct EditTaskView: View {
                     notes = task.notes
                 }
             }
+            Divider()
+            Button("Mark Task as Complete"){
+                userInfo.removeTask(taskID: task.id)
+                self.selected = false
+            }.buttonStyle(.borderedProminent)
             .toolbar{
                 ToolbarItem{saveTaskButton}
                 ToolbarItem{cancelTaskButton}

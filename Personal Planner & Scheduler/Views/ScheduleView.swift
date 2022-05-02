@@ -13,7 +13,6 @@ struct ScheduleView: View {
     enum sortType: String, CaseIterable {
         case alphabetical = "Alphabetical"
         case duedate = "Due Date"
-        case bygroup = "Group"
     }
     @State var selectedTask: Task? = nil
     @State var selectedT: Bool = false
@@ -26,16 +25,18 @@ struct ScheduleView: View {
                     ForEach(sortType.allCases, id: \.self){ sType in
                         Text(sType.rawValue).tag(sType)
                     }
-                }
+                }.padding()
                 switch (sort) {
                 case .alphabetical:
                     ForEach(userInfo.getAllTasks().sorted{$0.name < $1.name}){ task in
-                        HStack{
-                            Image(systemName: "square.and.pencil")
-                            Button(task.name){
-                                selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)
-                                selectedT = true
-                            }.buttonStyle(.borderless)
+                        GroupBox{
+                            HStack{
+                                Image(systemName: "square.and.pencil")
+                                Button(task.name){
+                                    selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)
+                                    selectedT = true
+                                }.buttonStyle(.borderless)
+                            }
                         }
                     }
                 case .duedate:
@@ -66,19 +67,18 @@ struct ScheduleView: View {
                         case .neither:
                             break
                         }
-                        print("\($0.name) due at \(String(describing: date0)) < \($1.name) due at \(String(describing: date1)) is \(date0 < date1)")
                         return date0 < date1
                     }){ task in
-                        HStack{
-                            Image(systemName: "square.and.pencil")
-                            Button(task.name){
-                                selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)
-                                selectedT = true
-                            }.buttonStyle(.borderless)
+                        GroupBox{
+                            HStack{
+                                Image(systemName: "square.and.pencil")
+                                Button(task.name){
+                                    selectedTask = userInfo.recursiveGetTask(currGrp: userInfo.tasks, taskID: task.id)
+                                    selectedT = true
+                                }.buttonStyle(.borderless)
+                            }
                         }
                     }
-                case .bygroup:
-                    Text("Implement by group functionality")
                 }
             }
             .toolbar{
